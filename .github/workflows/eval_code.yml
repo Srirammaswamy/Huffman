@@ -24,13 +24,19 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo apt-get update
+          sudo apt-get install linux-tools-common linux-tools-generic linux-tools-`uname -r`
           python3 -m pip install --upgrade pip
           pip install pytest
-          
-      - name: Test with pytest
-        run: |
-          ./run_test.sh
-          
+
       - name: Evaluate code
         run: |
           ./run.sh
+    
+      - name: Profile code
+        run: |
+          ./profile.sh
+
+      - name: Test with pytest
+        run: |
+          ./run_test.sh
